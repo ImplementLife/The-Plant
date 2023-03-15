@@ -1,5 +1,7 @@
 {
   "itemGroup.mod_materials_tab": "ImplLife",
   "item.impllife_core.wirecoil_copper": "Катушка (Мідь)",
-  "item.impllife_core.wirecoil_steel": "Катушка (Сталь)"
+  "item.impllife_core.wirecoil_steel": "Катушка (Сталь)",
+  "item.impllife_core.copper_ore": "Мідь (Руда)",
+  "item.impllife_core.tin_ore": "Олово (Руда)"
 }

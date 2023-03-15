@@ -1,6 +1,8 @@
 {
   "itemGroup.mod_materials_tab": "ImplLife",
   "item.impllife_core.wirecoil_copper": "Coil (Copper)",
-  "item.impllife_core.wirecoil_steel": "Coil (Steel)"
+  "item.impllife_core.wirecoil_steel": "Coil (Steel)",
+  "item.impllife_core.copper_ore": "Copper (Ore)",
+  "item.impllife_core.tin_ore": "Tin (Ore)"
 
 }

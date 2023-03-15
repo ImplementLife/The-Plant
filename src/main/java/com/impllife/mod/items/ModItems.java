@@ -1,7 +1,6 @@
-package com.impllife.mod.init;
+package com.impllife.mod.items;
 
 import com.impllife.mod.BootMod;
-import com.impllife.mod.items.MaterialItem;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

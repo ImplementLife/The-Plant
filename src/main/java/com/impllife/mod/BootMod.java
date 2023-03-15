@@ -1,6 +1,7 @@
 package com.impllife.mod;
 
-import com.impllife.mod.init.ModItems;
+import com.impllife.mod.block.ModBlocks;
+import com.impllife.mod.items.ModItems;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -20,8 +21,9 @@ public class BootMod {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         eventBus.addListener(this::setup);
         eventBus.addListener(this::doClientStuff);
-
+        ModBlocks.BLOCKS.register(eventBus);
         ModItems.ITEMS.register(eventBus);
+
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
