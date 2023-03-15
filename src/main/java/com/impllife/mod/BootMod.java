@@ -11,11 +11,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import static com.impllife.mod.BootMod.MOD_ID;
+
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("impllife_core")
+@Mod(MOD_ID)
 public class BootMod {
     private static final Logger LOGGER = LogManager.getLogger();
-    public static final String MOD_ID = "impllife_core";
+    public static final String MOD_ID = "il_the_plant";
 
     public BootMod() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

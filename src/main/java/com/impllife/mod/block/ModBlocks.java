@@ -3,6 +3,7 @@ package com.impllife.mod.block;
 import com.impllife.mod.BootMod;
 import com.impllife.mod.items.ModItems;
 import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.AbstractBlock.Properties;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockNamedItem;
@@ -14,13 +15,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 
-import static com.impllife.mod.items.ModItemGroup.MOD_TAB;
+import static com.impllife.mod.items.ModItemGroup.GEOLOGY_TAB;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, BootMod.MOD_ID);
 
-    public static final RegistryBlockContainer COPPER_ORE = registerBlock("copper_ore", () -> new Block(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(4,6)), MOD_TAB);
-    public static final RegistryBlockContainer TIN_ORE = registerBlock("tin_ore", () -> new Block(AbstractBlock.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2,3)), MOD_TAB);
+    public static final RegistryBlockContainer COPPER_ORE = registerBlock("copper_ore", () -> new Block(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(4,6)), GEOLOGY_TAB);
+    public static final RegistryBlockContainer TIN_ORE = registerBlock("tin_ore", () -> new Block(Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(2,3)), GEOLOGY_TAB);
 
     private static <T extends Block> RegistryBlockContainer registerBlock(String id, Supplier<T> block, ItemGroup group) {
         RegistryObject<Block> result = BLOCKS.register(id, block);

@@ -1,0 +1,23 @@
+{
+  "itemGroup.geology": "Geology",
+  "itemGroup.metallurgical": "Metallurgical",
+
+  "item.il_the_plant.wire_copper": "Wire (Copper)",
+  "item.il_the_plant.wire_steel": "Wire (Steel)",
+
+  "item.il_the_plant.coil": "Coil (Copper)",
+  "item.il_the_plant.cobble": "Cobble",
+
+  "item.il_the_plant.copper_ore": "Copper (Ore)",
+  "item.il_the_plant.copper_cobble": "Copper (Cobble)",
+  "item.il_the_plant.copper_cobble_ore": "Copper (Cobble Ore)",
+  "item.il_the_plant.copper_cobble_crushed": "Copper (Cobble Crushed)",
+  "item.il_the_plant.copper_cobble_ore_crushed": "Copper (Cobble Ore Crushed)",
+
+  "item.il_the_plant.tin_ore": "Tin (Ore)",
+  "item.il_the_plant.tin_cobble": "Tin (Cobble)",
+  "item.il_the_plant.tin_cobble_ore": "Tin (Cobble Ore)",
+  "item.il_the_plant.tin_cobble_crushed": "Tin (Cobble Crushed)",
+  "item.il_the_plant.tin_cobble_ore_crushed": "Tin (Cobble Ore Crushed)"
+
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "il_the_plant:items/ore/copper/cobble_ore"
+  }
+}

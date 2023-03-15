@@ -1,0 +1,22 @@
+{
+  "itemGroup.geology": "Геологія",
+  "itemGroup.metallurgical": "Металургія",
+
+  "item.il_the_plant.wire_copper": "Дріт (Мідь)",
+  "item.il_the_plant.wire_steel": "Дріт (Сталь)",
+
+  "item.il_the_plant.coil": "Котушка (Мідь)",
+  "item.il_the_plant.cobble": "Cobble",
+
+  "item.il_the_plant.copper_ore": "Мідь (Порода)",
+  "item.il_the_plant.copper_cobble": "Мідь (Руда)",
+  "item.il_the_plant.copper_cobble_ore": "Мідь (Камениста Руда)",
+  "item.il_the_plant.copper_cobble_crushed": "Мідь (Руда Подрібнена)",
+  "item.il_the_plant.copper_cobble_ore_crushed": "Мідь (Камениста Руда Подрібнена)",
+
+  "item.il_the_plant.tin_ore": "Олово (Порода)",
+  "item.il_the_plant.tin_cobble": "Олово (Руда)",
+  "item.il_the_plant.tin_cobble_ore": "Олово (Камениста Руда)",
+  "item.il_the_plant.tin_cobble_crushed": "Олово (Руда Подрібнена)",
+  "item.il_the_plant.tin_cobble_ore_crushed": "Олово (Камениста Руда Подрібнена)"
+}

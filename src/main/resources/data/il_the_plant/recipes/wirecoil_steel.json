@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xyx",
+    "xxx"
+  ],
+  "key": {
+    "x": {"item": "minecraft:iron_ingot"},
+    "y": {"tag": "minecraft:planks"}
+  },
+  "result": {
+    "item": "il_the_plant:wire_steel",
+    "count": 4
+  }
+}

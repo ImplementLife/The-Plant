@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "impllife_core:block/tin_ore/stone"
-  }
-}

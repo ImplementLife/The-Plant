@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "il_the_plant:block/copper_ore/stone"
+  }
+}
