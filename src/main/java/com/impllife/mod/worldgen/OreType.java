@@ -7,8 +7,8 @@ import net.minecraftforge.common.util.Lazy;
 import java.util.NoSuchElementException;
 
 public enum OreType {
-    COPPER_ORE(Lazy.of(ModBlocks.COPPER_ORE.getBlock()), 10, 15, 25, 50),
-    TIN_ORE(Lazy.of(ModBlocks.TIN_ORE.getBlock()), 10, 15, 25, 50),
+    COPPER_ORE(Lazy.of(ModBlocks.COPPER_ORE.getBlock()), 6, 8, 25, 50),
+    TIN_ORE(Lazy.of(ModBlocks.TIN_ORE.getBlock()), 6, 8, 20, 70),
     ;
     private final Lazy<Block> block;
     private final int minVeinSize;

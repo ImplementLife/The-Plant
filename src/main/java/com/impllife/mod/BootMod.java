@@ -12,8 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.impllife.mod.BootMod.MOD_ID;
+import static com.impllife.mod.worldgen.test.InitSurfaceBuilder.SURFACE_BUILDER;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(MOD_ID)
 public class BootMod {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -25,7 +25,7 @@ public class BootMod {
         eventBus.addListener(this::doClientStuff);
         ModBlocks.BLOCKS.register(eventBus);
         ModItems.ITEMS.register(eventBus);
-
+        SURFACE_BUILDER.register(eventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

@@ -1,0 +1,14 @@
+{
+  "type": "il_the_plant:example",
+  "config": {
+    "top_material": {
+        "Name": "minecraft:dirt"
+    },
+    "under_material": {
+        "Name": "minecraft:dirt"
+    },
+    "underwater_material": {
+        "Name": "minecraft:dirt"
+    }
+  }
+}
