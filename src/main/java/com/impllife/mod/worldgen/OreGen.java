@@ -14,10 +14,10 @@ import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = BootMod.MOD_ID)
+//@Mod.EventBusSubscriber(modid = BootMod.MOD_ID)
 public class OreGen {
 
-    @SubscribeEvent
+   // @SubscribeEvent
     public static void generate(final BiomeLoadingEvent event) {
         for (OreType oreType : OreType.values()) {
             OreFeatureConfig oreFeatureConfig = new OreFeatureConfig(

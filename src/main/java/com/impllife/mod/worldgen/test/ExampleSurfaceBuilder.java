@@ -1,5 +1,6 @@
 package com.impllife.mod.worldgen.test;
 
+import com.impllife.mod.block.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -15,33 +16,48 @@ import java.util.Random;
 
 public class ExampleSurfaceBuilder extends DefaultSurfaceBuilder {
     private static final Logger LOGGER = LogManager.getLogger();
-    private ChunkPos pos;
+    private BlockState COPPER_ORE;
+    private BlockState TIN_ORE;
 
     public ExampleSurfaceBuilder() {
         super(SurfaceBuilderConfig.CODEC);
+        COPPER_ORE = ModBlocks.COPPER_ORE.getBlock().get().defaultBlockState();
+        TIN_ORE = ModBlocks.TIN_ORE.getBlock().get().defaultBlockState();
 
         //new ResourceLocation("minecraft", "textures/items/" + aResourceLocation + ".png");
         LOGGER.info("ExampleSurfaceBuilder created");
     }
 
+    private ChunkPos pos;
+    private boolean answer;
+    private boolean isProcessingChunk(Random random, IChunk chunk) {
+        if (pos == null || !pos.equals(chunk.getPos())) {
+            pos = chunk.getPos();
+            answer = random.nextDouble() < 0.7;
+        }
+        return answer;
+    }
+
 
     protected void buildSurface2(Random random, IChunk chunk, Biome biome, int x, int z, int terrainHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState underwaterBlock, int seaLevel) {
+        if (isProcessingChunk(random, chunk)) return;
         BlockPos.Mutable mutable = new BlockPos.Mutable();
-        /*if (!chunk.getPos().equals(pos)) {
-            LOGGER.info("gen chunk x = {}, z = {}", pos.x, pos.z);
-        }*/
-//        LOGGER.info("gen chunk x = {}, z = {}", pos.x, pos.z);
-//        pos = chunk.getPos();
-//        if (pos.x != 1 && pos.z != 1) return;
-//        for (int y = terrainHeight; y >= 0; --y) {
-//            mutable.set(x, y, z);
-//            chunk.setBlockState(mutable, Blocks.AIR.defaultBlockState(), false);
-//        }
+
+        for (int y = terrainHeight; y >= 0; --y) {
+            if (y > 40 && y < 55) {
+                mutable.set(x, y, z);
+                if (random.nextDouble() > 0.6) {
+                    chunk.setBlockState(mutable, COPPER_ORE, false);
+                } else {
+                    chunk.setBlockState(mutable, Blocks.AIR.defaultBlockState(), false);
+                }
+            }
+        }
     }
 
     @Override
     public void apply(Random random, IChunk chunk, Biome biome, int x, int z, int h, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
-        this.buildSurface(random, chunk, biome, x, z, h, noise, defaultBlock, defaultFluid, config.getTopMaterial(), config.getUnderMaterial(), config.getUnderwaterMaterial(), seaLevel);
+        this.buildSurface2(random, chunk, biome, x, z, h, noise, defaultBlock, defaultFluid, config.getTopMaterial(), config.getUnderMaterial(), config.getUnderwaterMaterial(), seaLevel);
     }
 
     protected void buildSurface(Random random, IChunk chunk, Biome biome, int x, int z, int terrainHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState underwaterBlock, int seaLevel) {

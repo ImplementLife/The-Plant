@@ -12,6 +12,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import static com.impllife.mod.BootMod.MOD_ID;
+import static net.minecraft.world.gen.GenerationStage.Decoration.UNDERGROUND_ORES;
 
 @Mod.EventBusSubscriber(modid = BootMod.MOD_ID)
 public class InitSurfaceBuilder {
@@ -32,8 +33,9 @@ public class InitSurfaceBuilder {
         for (GenerationStage.Carving carving : GenerationStage.Carving.values()) {
             generation.getCarvers(carving).clear();
         }
-        for (GenerationStage.Decoration decor : GenerationStage.Decoration.values()) {
+        /*for (GenerationStage.Decoration decor : GenerationStage.Decoration.values()) {
             generation.getFeatures(decor).clear();
-        }
+        }*/
+        generation.getFeatures(GenerationStage.Decoration.UNDERGROUND_ORES).clear();
     }
 }
