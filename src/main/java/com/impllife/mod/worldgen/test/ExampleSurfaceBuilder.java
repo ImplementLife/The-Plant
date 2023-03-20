@@ -1,12 +1,15 @@
 package com.impllife.mod.worldgen.test;
 
+import com.google.common.collect.ImmutableList;
 import com.impllife.mod.block.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
+import net.minecraft.world.gen.PerlinNoiseGenerator;
 import net.minecraft.world.gen.surfacebuilders.DefaultSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import org.apache.logging.log4j.LogManager;
@@ -15,9 +18,10 @@ import org.apache.logging.log4j.Logger;
 import java.util.Random;
 
 public class ExampleSurfaceBuilder extends DefaultSurfaceBuilder {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOG = LogManager.getLogger();
     private BlockState COPPER_ORE;
     private BlockState TIN_ORE;
+    private PerlinNoiseGenerator generator;
 
     public ExampleSurfaceBuilder() {
         super(SurfaceBuilderConfig.CODEC);
@@ -25,42 +29,59 @@ public class ExampleSurfaceBuilder extends DefaultSurfaceBuilder {
         TIN_ORE = ModBlocks.TIN_ORE.getBlock().get().defaultBlockState();
 
         //new ResourceLocation("minecraft", "textures/items/" + aResourceLocation + ".png");
-        LOGGER.info("ExampleSurfaceBuilder created");
+        LOG.info("ExampleSurfaceBuilder created");
     }
 
     private ChunkPos pos;
-    private boolean answer;
-    private boolean isProcessingChunk(Random random, IChunk chunk) {
+    private boolean isProcessingChunk;
+    private boolean isProcessingChunk(IChunk chunk) {
         if (pos == null || !pos.equals(chunk.getPos())) {
             pos = chunk.getPos();
-            answer = random.nextDouble() < 0.7;
+            isProcessingChunk = generator.getValue(pos.x, pos.z, false) + 0.5 < 0.88;
         }
-        return answer;
+        return isProcessingChunk;
     }
+    public PerlinNoiseGenerator getGenerator(long seed) {
+        if (generator == null) {
+            generator = new PerlinNoiseGenerator(new SharedSeedRandom(seed >> 2), ImmutableList.of(-2, -1, 0));
+        }
+        return generator;
+    }
+    private final int maxH = 176;
+    private final int minH = 122;
 
+    protected void generate(Random random, IChunk chunk, Biome biome, int x, int z, int terrainHeight, double noise, long seed, StatesBlocks statesBlocks) {
+        PerlinNoiseGenerator generator = getGenerator(seed);
+        if (isProcessingChunk(chunk)) return;
 
-    protected void buildSurface2(Random random, IChunk chunk, Biome biome, int x, int z, int terrainHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState underwaterBlock, int seaLevel) {
-        if (isProcessingChunk(random, chunk)) return;
         BlockPos.Mutable mutable = new BlockPos.Mutable();
+        double value = generator.getSurfaceNoiseValue(x * 0.0625, z * 0.0625, 0.0625, 0.0625) + 0.5;
 
-        for (int y = terrainHeight; y >= 0; --y) {
-            if (y > 40 && y < 55) {
-                mutable.set(x, y, z);
-                if (random.nextDouble() > 0.6) {
-                    chunk.setBlockState(mutable, COPPER_ORE, false);
-                } else {
-                    chunk.setBlockState(mutable, Blocks.AIR.defaultBlockState(), false);
-                }
+        int space = (int) ((maxH - minH) * value);
+        int escape = (maxH - minH - space) / 2;
+
+        for (int y = minH + 1 + escape; y < maxH - escape; y++) {
+            mutable.set(x, y, z);
+//                BlockState currentBlockInWorld = chunk.getBlockState(mutable);
+//                if (!currentBlockInWorld.isAir()) continue;
+            if (random.nextDouble() > 0.67) {
+                chunk.setBlockState(mutable, COPPER_ORE, false);
+            } else {
+                chunk.setBlockState(mutable, Blocks.STONE.defaultBlockState(), false);
             }
         }
+        mutable.set(x, 100, z);
+        chunk.setBlockState(mutable, Blocks.GLASS.defaultBlockState(), false);
     }
 
     @Override
     public void apply(Random random, IChunk chunk, Biome biome, int x, int z, int h, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config) {
-        this.buildSurface2(random, chunk, biome, x, z, h, noise, defaultBlock, defaultFluid, config.getTopMaterial(), config.getUnderMaterial(), config.getUnderwaterMaterial(), seaLevel);
+        this.generate(random, chunk, biome, x, z, h, noise, seed, new StatesBlocks(defaultBlock, defaultFluid, config.getTopMaterial(), config.getUnderMaterial(), config.getUnderwaterMaterial(), seaLevel));
     }
 
-    protected void buildSurface(Random random, IChunk chunk, Biome biome, int x, int z, int terrainHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState underwaterBlock, int seaLevel) {
+    private void example(Random random, IChunk chunk, Biome biome, int x, int z, int terrainHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, BlockState topBlock, BlockState middleBlock, BlockState underwaterBlock, int seaLevel) {
+        if (true) return; // !!! that example code, don't use it !!!
+
         BlockPos.Mutable mutable = new BlockPos.Mutable();
         int depth = -1; // Will be used to know how deep we are in solid blocks so we know when to stop placing middleBlock
         int scaledNoise = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
